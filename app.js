@@ -74,3 +74,11 @@ const fn = (prop) => { // prop - название свойства, наприм
       }
     };
   };
+  // проверка 
+  const arr = [
+    { name: 'Bob', age: '25' },
+    { name: 'Ann', age: '30' },
+    { name: 'Tom', age: '35' },
+  ];
+  
+  arr.forEach(fn('name')); 
