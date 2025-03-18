@@ -1,35 +1,28 @@
-/* function sayHello() {
-    console.log("Привет, мир!");
-}
-
-function sayGoodbye() {
-    console.log("Пока, мир!");
-}
-
-function sayName(name) {
-    console.log(`Меня зовут ${name}`);
-}
-
-sayHello();
-sayGoodbye();
-sayName("Habi"); */
-
-function myPrompt() {
-   
-    let number = prompt("Введите число:");
-    if (number === null || isNaN(number) || !Number.isInteger(Number(number))) {
-        alert("Некорректный ввод!");
-        return;
-    }
-
-    let base = prompt("Введите систему счисления для числа (от 2 до 36):");
+function deepCopy(obj) {
     
-    if (base === null || isNaN(base) || !Number.isInteger(Number(base)) || base < 2 || base > 36) {
-        alert("Некорректный ввод!");
-        return;
+    if (typeof obj !== 'object' || obj === null) {
+        return obj; // Если это не объект, возвращаем его как есть
     }
-    let result = Number(number).toString(Number(base));
-    alert(`Ответ: число ${number} в ${base}-ой системе счисления = ${result}`);
+
+    const copy = Array.isArray(obj) ? [] : {};
+
+    // Рекурсивно копируем каждое свойство объекта
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            copy[key] = deepCopy(obj[key]); // Рекурсивный вызов для вложенных объектов
+        }
+    }
+
+    return copy;
 }
 
-myPrompt();
+const ob = { a: 3, b: { c: 7 } };
+const obCopy = deepCopy(ob);
+
+obCopy.a = 10;
+obCopy.b.c = 11;
+
+console.log('ob: ', ob.a); 
+console.log('ob: ', ob.b.c); 
+console.log('obCopy: ', obCopy.a); 
+console.log('obCopy: ', obCopy.b.c);
