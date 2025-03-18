@@ -82,3 +82,14 @@ const fn = (prop) => { // prop - название свойства, наприм
   ];
   
   arr.forEach(fn('name')); 
+
+  // The 4th task
+
+  function reverseStr(str) {
+    return str
+      .split('')   // Разбиваем строку на массив символов
+      .reverse()   // Разворачиваем массив
+      .join('');   // Объединяем массив обратно в строку
+  }
+  console.log(reverseStr('Hello, Aston team!')); 
+  
