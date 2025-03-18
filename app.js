@@ -1,4 +1,6 @@
-/* function deepCopy(obj) {
+// First task
+
+ function deepCopy(obj) {
     
     if (typeof obj !== 'object' || obj === null) {
         return obj; // Если это не объект, возвращаем его как есть
@@ -60,3 +62,15 @@ function selectFromInterval(arr, a, b) {
 }
 
 console.log(selectFromInterval([1, 3, 5], 2, 4))
+
+// The 3rd task
+
+const fn = (prop) => { // prop - название свойства, например 'name' или 'age'
+    let values = []; 
+    return (item, index, array) => { 
+      values.push(item[prop]); 
+      if (index === array.length - 1) { 
+        console.log(values.join(', ')); 
+      }
+    };
+  };
