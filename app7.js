@@ -69,3 +69,47 @@ console.log(result + 10); // (valueOf вызывается автоматиче�
 
 // Проверка с нулем и отрицательными числами
 console.log(add(-5)(10)(3)); 
+
+//The thrird task
+
+function logger() {
+    console.log(`I output only external context: ${this.item}`);
+  }
+    const obj = { item: "some value" };
+  
+  // Создает новую функцию с навсегда привязанным контекстом obj
+  const boundLogger = logger.bind(obj);
+  boundLogger(); 
+  
+  // Вызывает функцию сразу, подменяя контекст на obj
+  logger.call(obj);
+  
+  logger.apply(obj);
+
+  // The fourth task
+
+Function.prototype.myBind = function(context, ...bindArgs) {
+    if (typeof this !== 'function') {
+        throw new Error('myBind можно вызывать только на функциях');
+    }
+
+    const originalFunc = this; // Сохраняем исходную функцию (например, logger)
+
+    // Возвращаем новую функцию с привязанным контекстом и аргументами
+    return function(...callArgs) {
+        // Вызываем исходную функцию с контекстом и объединенными аргументами
+        return originalFunc.apply(context, [...bindArgs, ...callArgs]);
+    };
+};
+
+function greet(greeting, name) {
+    console.log(`${greeting}, ${name}! Меня зовут ${this.userName}`);
+}
+
+const user = { userName: "Habee" };
+
+// Привязываем контекст user и первый аргумент "Привет"
+const boundGreet = greet.myBind(user, "Привет");
+
+// Вызываем с оставшимся аргументом "Aston"
+boundGreet("Aston"); 
