@@ -1,3 +1,4 @@
+// The first task
 function memoize(callback) {
     const cache = {};
 
@@ -33,3 +34,38 @@ console.log(memoizedSum(2, -4, 5));
 
 // Второй вызов с другим порядком — берется из кэша
 console.log(memoizedSum(-4, 2, 5));
+
+//The second one
+
+function add(a) {
+    let sum = a;
+
+    function next(b) {
+        sum += b; 
+        return next; 
+    }
+
+    // Переопределяем метод valueOf для возврата суммы при числовом преобразовании
+    next.valueOf = function() {
+        return sum;
+    };
+
+    // Переопределяем метод toString для вывода в консоль
+    next.toString = function() {
+        return sum.toString();
+    };
+
+    return next; 
+}
+
+
+console.log(add(1)(2)(3));
+
+console.log(add(10)(20)(30)(40));
+
+// Использование в числовых операциях
+const result = add(5)(5);
+console.log(result + 10); // (valueOf вызывается автоматически)
+
+// Проверка с нулем и отрицательными числами
+console.log(add(-5)(10)(3)); 
